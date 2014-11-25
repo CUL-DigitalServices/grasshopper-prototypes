@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Batch editing</title>
+    <link rel="stylesheet" href="shared/vendor/css/bootstrap.css">
+    <link rel="stylesheet" href="shared/vendor/css/font-awesome.css">
+    <link rel="stylesheet" href="shared/gh/css/app.css">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <table id="gh-batch-table" class="table">
+            <thead>
+                <tr class="active">
+                    <td>
+                        <input type="checkbox" class="gh-batch-select">
+                    </td>
+                    <td>
+                        <span class="gh-batch-num-selected">0</span> selected
+                    </td>
+                    <td colspan="4">
+                        <span class="pull-right"><a href="#" class="gh-batch-toggle"><span class="gh-batch-toggle-items"></span> items <i class="fa fa-chevron-down"></i></a></span>
+                    </td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="6"><button id="gh-btn-save" class="btn btn-primary pull-right">Save</button></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr id="gh-js-batch-edit-container" class="active">
+                    <td colspan="6" style="padding: 10px 0;">
+                        <form id="gh-batch-edit-form">
+                            <fieldset>
+                                <table id="gh-batch-edit-table" style="width: 100%;">
+                                    <tr>
+                                        <td class="gh-batch-col-5">&#160;</td>
+                                        <td class="gh-batch-col-20">
+                                            <input class="gh-batch-edit-parent" data-batch="title" type="text" placeHolder="Exercices">
+                                        </td>
+                                        <td class="gh-batch-col-20">
+                                            <div class="gh-batch-edit-dates-form">
+                                                <input type="text" class="gh-edit-date-day" size="3" placeHolder="Mon">
+                                                <input type="text" class="gh-edit-date-start" size="2" placeHolder="09">
+                                                <input type="text" class="gh-edit-date-end" size="2" placeHolder="10">
+                                                <input type="hidden" class="gh-edit-date gh-batch-edit-parent" data-batch="date" >
+                                            </div>
+                                        </td>
+                                        <td class="gh-batch-col-20">
+                                            <select class="gh-batch-edit-parent" data-batch="lecturer">
+                                                <option>Toshimi Boulding</option>
+                                                <option>Haruko Laurie</option>
+                                            </select>
+                                        </td>
+                                        <td class="gh-batch-col-20">
+                                            <input class="gh-batch-edit-parent" data-batch="room" type="text" placeHolder="Room 7">
+                                        </td>
+                                        <td class="gh-batch-col-15">
+                                            <select class="gh-batch-edit-parent" data-batch="type">
+                                                <option>Lecture</option>
+                                                <option>Seminar</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+                <tr class="gh-batch-row">
+                    <td class="gh-batch-col-5"><input type="checkbox" class="gh-batch-row-select"></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="title">Exercices</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="date">Lent, on Mon 9am-10am</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable-select gh-editable-select-lecturer gh-batch-edit-child" data-batch="lecturer">Toshimi Boulding</span></td>
+                    <td class="gh-batch-col-20"><span class="gh-editable gh-batch-edit-child" data-batch="room">Room 7</span></td>
+                    <td class="gh-batch-col-15"><span class="gh-editable-select gh-editable-select-type gh-batch-edit-child" data-batch="type">Lecture</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script data-main="shared/gh/js/app.js" src="shared/vendor/js/require.js"></script>
+</body>
+</html>

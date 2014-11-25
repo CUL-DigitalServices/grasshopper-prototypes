@@ -1,0 +1,44 @@
+#gh-batch-table .gh-batch-toggle {
+    text-align: right;
+}
+
+#gh-batch-table .gh-batch-col-5 {
+    width: 5%;
+}
+
+#gh-batch-table .gh-batch-col-15 {
+    width: 15%;
+}
+
+#gh-batch-table .gh-batch-col-20 {
+    width: 20%;
+}
+
+#gh-batch-table .gh-batch-row:hover {
+    background-color: #eee;
+}
+
+#gh-batch-table #gh-js-batch-edit-container {
+    display: none;
+}
+
+#gh-batch-table #gh-js-batch-edit-container  #gh-batch-edit-table td {
+    padding: 0 6px;
+}
+
+#gh-batch-table #gh-js-batch-edit-container .gh-batch-edit-dates {
+    display: none;
+}
+
+#gh-btn-save {
+    display: none;
+}
+
+.gh-batch-edit-child:hover {
+    background-color: white;
+    border: 1px solid black;
+    padding: 3px 5px;
+    -moz-border-radius: 3px;
+         border-radius: 3px;
+
+}
