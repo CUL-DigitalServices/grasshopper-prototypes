@@ -8,7 +8,8 @@ requirejs.config({
 
         // Plugins
         'jquery.check-all': 'vendor/js/jquery.check-all',
-        'jquery.jeditable': 'vendor/js/jquery.jeditable'
+        'jquery.jeditable': 'vendor/js/jquery.jeditable',
+        'jquery.jeditable.timetable': 'vendor/js/jquery.jeditable.timetable'
     },
     'shim' : {
         'jquery.check-all' : {
@@ -16,11 +17,14 @@ requirejs.config({
         },
         'jquery.jeditable' : {
             'deps': ['jquery']
+        },
+        'jquery.jeditable.timetable' : {
+            'deps': ['jquery.jeditable']
         }
     }
 });
 
-require(['jquery','lodash','jquery.check-all','jquery.jeditable'], function($, _) {
+require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditable.timetable'], function($, _) {
 
     // Cache some jQuery selectors
     var $batchEditContainer = $('#gh-js-batch-edit-container');
@@ -184,6 +188,8 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable'], function($, _
     var onSaveClick = function(event) {
         // Uncheck all the checkboxes
         $('.gh-batch-row-select:checked').trigger('click');
+        // Save the date batch editing forms
+        $('.gh-editable-timetable form').trigger('submit');
         // Hide the batch edit form container
         toggleBatchEditContainer(false);
         // Hide the save button
@@ -244,10 +250,12 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable'], function($, _
             'style': 'inherit'
         });
 
-        $('.gh-editable-select.gh-editable-select-lecturer').editable(function(value, settings) { return value; },{
-            'data': {'Toshimi Boulding':'Toshimi Boulding','Haruko Laurie':'Haruko Laurie'},
-            'type': 'select',
-            'style': 'inherit'
+        $('.gh-editable-timetable').editable(function(value, settings) {
+            return value;
+        },{
+            'type': 'timetable',
+            'style': 'inherit',
+            'submit': 'ok'
         });
 
         $('.gh-editable-select.gh-editable-select-type').editable(function(value, settings) { return value; },{
