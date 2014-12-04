@@ -1,44 +1,105 @@
-#gh-batch-table .gh-batch-toggle {
-    text-align: right;
+body {
+    margin-top: 10px;
+}
+
+td {
+    border-color: rgb(223,231,228);
+}
+
+tr.active > td {
+    background-color: rgb(223,231,228) !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #171717;
+}
+
+.btn.gh-batch-delete,
+.btn.gh-batch-row-delete {
+    background: none;
+}
+
+/* Batch table */
+.gh-batch-toggle:active,
+.gh-batch-toggle:hover {
+    text-decoration: none;
+}
+
+#gh-batch-table .gh-batch-col-3 {
+    width: 3%;
+    min-width: 3%;
 }
 
 #gh-batch-table .gh-batch-col-5 {
     width: 5%;
+    min-width: 5%;
+}
+
+#gh-batch-table .gh-batch-col-10 {
+    width: 10%;
+    min-width: 10%;
 }
 
 #gh-batch-table .gh-batch-col-15 {
     width: 15%;
+    min-width: 15%;
 }
 
 #gh-batch-table .gh-batch-col-20 {
     width: 20%;
+    min-width: 20%;
 }
 
 #gh-batch-table .gh-batch-col-25 {
     width: 25%;
+    min-width: 25%;
+}
+
+#gh-batch-table .gh-batch-col-30 {
+    width: 30%;
+    min-width: 30%;
+}
+
+#gh-batch-table .gh-batch-term-row {
+    border-bottom: 5px solid rgb(223,231,228);
+}
+
+#gh-batch-table .gh-batch-term-row > td {
+    border-top: none;
+    padding-bottom: 0;
+    padding-top: 15px;
+}
+
+#gh-batch-table .gh-batch-term-row > td,
+#gh-batch-table .gh-batch-row > td {
+    vertical-align: middle;
 }
 
 #gh-batch-table .gh-batch-row:hover {
     background-color: #eee;
 }
 
-#gh-batch-table #gh-js-batch-edit-container {
-    display: none;
+#gh-batch-table #gh-js-batch-edit-container > td {
+    border: none;
 }
 
 #gh-batch-table #gh-js-batch-edit-container  #gh-batch-edit-table td {
     padding: 0 6px;
 }
 
-#gh-batch-table #gh-js-batch-edit-container .gh-batch-edit-dates {
+#gh-batch-table #gh-js-batch-edit-container  #gh-batch-edit-table td input {
+    border: 1px solid #171717;
+    padding: 3px 5px;
+    width: 100%;
+}
+
+#gh-batch-table .gh-batch-edit-dates {
     display: none;
+    background-color: white;
 }
 
 #gh-btn-save {
-    display: none;
-}
-
-.gh-batch-toggle {
     display: none;
 }
 
