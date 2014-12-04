@@ -5,6 +5,7 @@ requirejs.config({
         // Vendor
         'jquery': 'vendor/js/jquery',
         'lodash': 'vendor/js/lodash',
+        'bootstrap': 'vendor/js/bootstrap',
 
         // Plugins
         'jquery.check-all': 'vendor/js/jquery.check-all',
@@ -12,56 +13,27 @@ requirejs.config({
         'jquery.jeditable.timetable': 'vendor/js/jquery.jeditable.timetable'
     },
     'shim' : {
-        'jquery.check-all' : {
+        'bootstrap': {
             'deps': ['jquery']
         },
-        'jquery.jeditable' : {
+        'jquery.check-all': {
             'deps': ['jquery']
         },
-        'jquery.jeditable.timetable' : {
+        'jquery.jeditable': {
+            'deps': ['jquery']
+        },
+        'jquery.jeditable.timetable': {
             'deps': ['jquery.jeditable']
         }
     }
 });
 
-require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditable.timetable'], function($, _) {
+require(['jquery','lodash','bootstrap','jquery.check-all','jquery.jeditable','jquery.jeditable.timetable'], function($, _) {
 
     // Cache some jQuery selectors
     var $batchEditContainer = $('#gh-js-batch-edit-container');
     var $batchEditForm = $('#gh-batch-edit-form');
     var selectedClass = 'info';
-
-    /**
-     * Function that toggles the batch edit container
-     *
-     * @param  {Boolean}    show    Whether or not the container needs to be shown
-     * @private
-     */
-    var toggleBatchEditContainer = function(show) {
-        $batchEditForm.trigger('reset');
-        $batchToggleChevron = $('.gh-batch-toggle i');
-        if (show) {
-            $batchEditContainer.show(150, function() {
-                $batchToggleChevron.removeClass('fa-chevron-down').addClass('fa-chevron-up');
-            });
-        } else {
-            $batchEditContainer.hide(150, function() {
-                $batchToggleChevron.removeClass('fa-chevron-up').addClass('fa-chevron-down');
-            });
-        }
-    };
-
-    /**
-     * Function that toggles the batch edit container
-     *
-     * @private
-     */
-    var onToggleBatchEditClick = function() {
-        // Toggle the batch edit container
-        toggleBatchEditContainer(Boolean($('#gh-js-batch-edit-container:hidden').length));
-        // Disable the default behaviour
-        return false;
-    };
 
     /**
      * Function that is invoked when a batch parent was edited
@@ -72,7 +44,7 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditab
     var onBatchEditParent = function(event) {
 
         // The batch edit parent input
-        var $batchParent = $(event.currentTarget);
+        var $batchParent = $(this);
         // The batch type
         var batchType = $batchParent.attr('data-batch');
 
@@ -115,21 +87,6 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditab
         $.each($checkedCheckboxes, function(i) {
             $($checkedCheckboxes[i]).parent().parent().addClass(selectedClass);
         });
-
-        // Count the selected rows
-        var numSelected = $checkedCheckboxes.length;
-
-        // Display the number of selected rows
-        $('.gh-batch-num-selected').html(numSelected);
-
-        // Determine whether or not a checkbox was checked
-        var isChecked = Boolean(numSelected);
-        var isHidden = $('#gh-js-batch-edit-container:hidden');
-        if (isChecked && isHidden) {
-            toggleBatchEditContainer(true);
-        } else if (!isChecked) {
-            toggleBatchEditContainer(false);
-        }
     };
 
     /**
@@ -180,6 +137,13 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditab
     };
 
     /**
+     *
+     */
+    var onAddEventClick = function() {
+        console.log('Add Event');
+    };
+
+    /**
      * Function that saves the entered form data
      *
      * @param  {Event}    event    A jQuery event
@@ -190,16 +154,30 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditab
         $('.gh-batch-row-select:checked').trigger('click');
         // Save the date batch editing forms
         $('.gh-editable-timetable form').trigger('submit');
-        // Hide the batch edit form container
-        toggleBatchEditContainer(false);
         // Hide the save button
-        $(event.currentTarget).hide();
+        $(this).hide();
+        // Reset the top form
+        $('#gh-batch-edit-form').trigger('reset');
         // Disable the default behaviour
         return false;
     };
 
     /**
-     *
+     * Delete a single row
+     */
+    var deleteRow = function() {
+        $(this).parent().parent().remove();
+    };
+
+    /**
+     * Delete all the rows
+     */
+    var deleteRows = function() {
+        $('.gh-batch-row').remove();
+    };
+
+    /**
+     * Show the save button is the user is editing
      */
     var isEditing = function() {
         $('#gh-btn-save').show();
@@ -213,17 +191,22 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditab
     var addBinding = function() {
         // Disable the default form behaviour
         $('#gh-batch-edit-form').on('submit', onFormSubmit);
+        // Add a new event
+        $('#gh-btn-add-event').on('click', onAddEventClick);
         // Save the form
         $('#gh-btn-save').on('click', onSaveClick);
         // Add keyup event to batch edit parent
         $('.gh-batch-edit-parent').on('keyup', onBatchEditParent);
         $('.gh-batch-edit-parent').on('change', onBatchEditParent);
+
+        // Row delete
+        $('.gh-batch-delete').on('click', deleteRows);
+        $('.gh-batch-row-delete').on('click', deleteRow);
+
         // Row checkbox change
         $('.gh-batch-row-select').on('change', onCheckboxChange);
-        // Parent checkbox change
         $('.gh-batch-select').on('change', onCheckboxChange);
-        // Toggle batch edit container
-        $('.gh-batch-toggle').on('click', onToggleBatchEditClick);
+
         // Toogle the time container
         $('.gh-btn-edit-dates').on('click', onEditDatesClick);
         $('.gh-btn-edit-dates-form').on('click', onEditDatesOkClick);
@@ -263,9 +246,6 @@ require(['jquery','lodash','jquery.check-all','jquery.jeditable','jquery.jeditab
             'type': 'select',
             'style': 'inherit'
         });
-
-        // Display the number of rows
-        $('.gh-batch-toggle-items').html($('.gh-batch-row').length);
 
         // Bind event listeners to the UI components
         addBinding();
